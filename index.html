@@ -1,76 +1,544 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>McSweats</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      background-color: #f7f7f5;
-      color: #222;
-      display: flex;
-      justify-content: center;
-      padding: 40px 20px;
-    }
-    .card {
-      max-width: 480px;
-      width: 100%;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      overflow: hidden;
-      text-align: center;
-    }
-    .card img {
-      width: 100%;
-      display: block;
-    }
-    .card-body {
-      padding: 28px 24px 32px;
-    }
-    h1 {
-      font-size: 1.4rem;
-      line-height: 1.4;
-      margin: 0 0 16px;
-    }
-    p {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: #444;
-      margin: 0 0 16px;
-    }
-    a {
-      color: #2a6f2a;
-      font-weight: 600;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    .contact {
-      font-size: 0.85rem;
-      color: #666;
-      margin-top: 24px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>McSweats 🏀 Trade Your Gear</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #ffd23f;
+    --orange: #ff8c42;
+    --pink: #ff4d8d;
+    --teal: #00c2a8;
+    --navy: #1c2541;
+    --paper: #fffdf7;
+    --ink: #22223b;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Poppins', sans-serif;
+    background-image:
+      radial-gradient(circle at 90% 5%, rgba(255, 210, 63, 0.25) 0%, transparent 40%),
+      radial-gradient(circle at 5% 90%, rgba(0, 194, 168, 0.2) 0%, transparent 40%);
+  }
+
+  h1, h2, h3 {
+    font-family: 'Baloo 2', cursive;
+    margin: 0;
+  }
+
+  a { color: inherit; }
+
+  .container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .logo {
+    font-family: 'Baloo 2', cursive;
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--navy);
+    object-fit: cover;
+  }
+
+  .logo span.dot {
+    color: var(--pink);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 22px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    padding-bottom: 3px;
+    border-bottom: 3px solid transparent;
+    transition: border-color 0.15s ease;
+  }
+
+  .nav-links a:hover {
+    border-color: var(--orange);
+  }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 40px 24px 60px;
+    position: relative;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    line-height: 1.15;
+    color: var(--navy);
+  }
+
+  .hero h1 .underline {
+    position: relative;
+    white-space: nowrap;
+  }
+
+  .hero h1 .underline::after {
+    content: "";
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    bottom: 2px;
+    height: 10px;
+    background: var(--yellow);
+    z-index: -1;
+    transform: rotate(-1deg);
+  }
+
+  .hero p.sub {
+    max-width: 560px;
+    margin: 18px auto 28px;
+    font-size: 1.05rem;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: 'Baloo 2', cursive;
+    font-weight: 700;
+    font-size: 1.05rem;
+    padding: 13px 28px;
+    border-radius: 14px;
+    border: 3px solid var(--navy);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    box-shadow: 4px 4px 0 var(--navy);
+  }
+
+  .btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--navy);
+  }
+
+  .btn-primary { background: var(--teal); color: var(--navy); }
+  .btn-secondary { background: var(--yellow); color: var(--navy); }
+  .btn-ghost { background: white; color: var(--navy); }
+
+  /* MARQUEE */
+  .marquee {
+    background: var(--navy);
+    color: var(--yellow);
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.05rem;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 10px 0;
+    transform: rotate(-1deg);
+    margin: 10px 0 40px;
+  }
+
+  .marquee span {
+    display: inline-block;
+    padding-left: 1rem;
+    animation: scroll 22s linear infinite;
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 50px 0;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .section-sub {
+    text-align: center;
+    color: #666;
+    max-width: 520px;
+    margin: 0 auto 36px;
+    font-size: 0.95rem;
+  }
+
+  /* GEAR GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+  }
+
+  .card {
+    background: white;
+    border: 3px solid var(--navy);
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 5px 5px 0 rgba(28, 37, 65, 0.15);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    text-align: center;
+  }
+
+  .card:hover {
+    transform: rotate(-1deg) translateY(-4px);
+    box-shadow: 7px 7px 0 rgba(28, 37, 65, 0.2);
+  }
+
+  .card .emoji {
+    font-size: 2.6rem;
+    margin-bottom: 8px;
+  }
+
+  .card h3 {
+    font-size: 1.1rem;
+    color: var(--navy);
+  }
+
+  .card .meta {
+    color: #777;
+    font-size: 0.82rem;
+    margin: 6px 0 12px;
+  }
+
+  .price-tag {
+    display: inline-block;
+    background: var(--yellow);
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 2px solid var(--navy);
+  }
+
+  #how,
+  #reselling,
+  #mission {
+    margin-top: 20px;
+  }
+
+  /* HOW IT WORKS */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    text-align: center;
+  }
+
+  .step-num {
+    width: 46px;
+    height: 46px;
+    line-height: 46px;
+    background: var(--pink);
+    color: white;
+    border-radius: 50%;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: 1.3rem;
+    margin: 0 auto 12px;
+    border: 3px solid var(--navy);
+  }
+
+  .step h3 {
+    font-size: 1.05rem;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .step p {
+    font-size: 0.88rem;
+    color: #666;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* RESELLING */
+  .reselling-card {
+    max-width: 420px;
+    margin: 0 auto;
+    background: white;
+    border: 3px solid var(--navy);
+    border-radius: 16px;
+    padding: 26px;
+    text-align: center;
+    box-shadow: 5px 5px 0 rgba(28, 37, 65, 0.15);
+  }
+
+  .reselling-card .emoji {
+    font-size: 2.6rem;
+    margin-bottom: 10px;
+  }
+
+  .reselling-card p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* MISSION */
+  .mission {
+    background: var(--navy);
+    border-radius: 24px;
+    color: white;
+    padding: 40px;
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .mission img {
+    width: 220px;
+    border-radius: 16px;
+    border: 4px solid var(--yellow);
+    transform: rotate(-2deg);
+    flex-shrink: 0;
+  }
+
+  .mission-text {
+    flex: 1;
+    min-width: 240px;
+  }
+
+  .mission-text h2 {
+    color: var(--yellow);
+    font-size: 1.7rem;
+    margin-bottom: 12px;
+  }
+
+  .mission-text p {
+    line-height: 1.7;
+    font-size: 0.95rem;
+    color: #dfe3f0;
+  }
+
+  .stat-bar {
+    margin-top: 18px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 999px;
+    height: 16px;
+    overflow: hidden;
+    border: 2px solid var(--yellow);
+  }
+
+  .stat-fill {
+    background: var(--teal);
+    height: 100%;
+    width: 62%;
+    border-radius: 999px;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--yellow);
+    margin-top: 6px;
+    font-weight: 600;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 40px 24px 50px;
+    color: #777;
+    font-size: 0.85rem;
+  }
+
+  footer .foot-logo {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.3rem;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  footer a.email {
+    color: var(--pink);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .mission { padding: 26px; }
+    .mission img { width: 100%; }
+  }
+</style>
 </head>
 <body>
-  <div class="card">
-    <img src="https://easy-links.s3.us-west-2.amazonaws.com/avatars/avatar-mcsweats.com-piwknp.jpeg" alt="Trade your used sports gear, and help music students in Brazil">
-    <div class="card-body">
-      <h1>Trade your used sports gear, and help music students in Brazil</h1>
-      <p>
-        McSweats is a student-built marketplace where you can exchange athletic
-        equipment and apparel. 50% of all proceeds of this site are donated to
-        Dona Gal Escola de Música, in Teresina, Brazil, to support musical
-        programs and instruments in this under-resourced community.
-      </p>
-      <p class="contact">
-        Questions? Reach out to <a href="mailto:mateus.carvalho@ljcds.org">mateus.carvalho@ljcds.org</a>
-      </p>
+
+<nav>
+  <div class="logo">
+    <img src="https://easy-links.s3.us-west-2.amazonaws.com/avatars/avatar-mcsweats.com-piwknp.jpeg" alt="McSweats logo">
+    McSweats<span class="dot">.</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#shop">Shop Gear</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#reselling">Reselling</a></li>
+    <li><a href="#mission">Our Mission</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <h1>Trade your used sports gear,<br> help kids learn <span class="underline">music</span> in Brazil 🎵</h1>
+    <p class="sub">
+      Got cleats collecting dust? Swap them for something you actually need.
+      Every trade sends 50% straight to Dona Gal Escola de Música in Teresina, Brazil.
+    </p>
+    <div class="cta-row">
+      <a href="#shop" class="btn btn-primary">Start Trading →</a>
+      <a href="#reselling" class="btn btn-secondary">Start Reselling</a>
+      <a href="#mission" class="btn btn-ghost">See the Impact</a>
     </div>
   </div>
+</header>
+
+<div class="marquee">
+  <span>⚽ CLEATS &nbsp; • &nbsp; 🏀 JERSEYS &nbsp; • &nbsp; 🎾 RACKETS &nbsp; • &nbsp; 🥊 GLOVES &nbsp; • &nbsp; 🏈 PADS &nbsp; • &nbsp; ⚽ CLEATS &nbsp; • &nbsp; 🏀 JERSEYS &nbsp; • &nbsp; 🎾 RACKETS &nbsp; • &nbsp; 🥊 GLOVES &nbsp; • &nbsp; 🏈 PADS &nbsp;</span>
+</div>
+
+<section id="shop" class="container">
+  <h2 class="section-title">🔥 Fresh on the Board</h2>
+  <p class="section-sub">Stuff other students just listed. DM to trade.</p>
+  <div class="grid">
+    <div class="card">
+      <div class="emoji">⚽</div>
+      <h3>Nike Cleats</h3>
+      <div class="meta">Size 9 · lightly scuffed</div>
+      <span class="price-tag">Trade for shin guards</span>
+    </div>
+    <div class="card">
+      <div class="emoji">🏀</div>
+      <h3>Warriors Jersey</h3>
+      <div class="meta">Youth L · barely worn</div>
+      <span class="price-tag">Trade for $10 credit</span>
+    </div>
+    <div class="card">
+      <div class="emoji">🎾</div>
+      <h3>Wilson Racket</h3>
+      <div class="meta">Adult · new grip tape</div>
+      <span class="price-tag">Trade for tennis balls</span>
+    </div>
+    <div class="card">
+      <div class="emoji">🥊</div>
+      <h3>Boxing Gloves</h3>
+      <div class="meta">14oz · like new</div>
+      <span class="price-tag">Trade for gear bag</span>
+    </div>
+    <div class="card">
+      <div class="emoji">🏈</div>
+      <h3>Shoulder Pads</h3>
+      <div class="meta">Medium · one season used</div>
+      <span class="price-tag">Trade for helmet</span>
+    </div>
+    <div class="card">
+      <div class="emoji">🏐</div>
+      <h3>Volleyball Knee Pads</h3>
+      <div class="meta">One size · unused</div>
+      <span class="price-tag">Trade for anything 🙂</span>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="container">
+  <h2 class="section-title">🛠️ How It Works</h2>
+  <p class="section-sub">Three steps. No adults required.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Snap a pic</h3>
+      <p>List your old gear in 2 minutes. Be honest about the scuffs 👀</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Find a match</h3>
+      <p>Browse in our message board what else is being traded</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Trade & give back</h3>
+      <p>Swap or sell your gear. Remember: 50% of every sale funds music lessons in Brazil.</p>
+    </div>
+  </div>
+</section>
+
+<section id="reselling" class="container">
+  <h2 class="section-title">📦 Online Reselling</h2>
+  <p class="section-sub">Not trying to trade? We've got you covered.</p>
+  <div class="reselling-card">
+    <div class="emoji">📦</div>
+    <p>Bring us your used gear or sportswear, and we'll resell it for you on the internet.</p>
+  </div>
+</section>
+
+<section id="mission" class="container">
+  <div class="mission">
+    <img src="https://easy-links.s3.us-west-2.amazonaws.com/avatars/avatar-mcsweats.com-piwknp.jpeg" alt="Music students in Teresina, Brazil">
+    <div class="mission-text">
+      <h2>Why we started this 🎻</h2>
+      <p>
+        McSweats began as a school project. Now it's a way to connect with other
+        students and to give back. Half of everything we make goes to
+        <strong>Dona Gal Escola de Música</strong> in Teresina, Brazil, funding instruments
+        and music classes for kids in an under-resourced community.
+      </p>
+      <div class="stat-bar"><div class="stat-fill"></div></div>
+      <div class="stat-label">62% of the way to our next instrument fund goal 🎯</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="foot-logo">McSweats 🧦</div>
+  <p>Questions, feedback, or just want to say hi?</p>
+  <a class="email" href="mailto:mateus.carvalho@ljcds.org">mateus.carvalho@ljcds.org</a>
+</footer>
+
 </body>
 </html>
