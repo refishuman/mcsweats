@@ -320,6 +320,18 @@
     margin: 0;
   }
 
+  .ship-tag {
+    display: inline-block;
+    margin-top: 14px;
+    background: var(--yellow);
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 5px 14px;
+    border-radius: 999px;
+    border: 2px solid var(--navy);
+  }
+
   /* MISSION */
   .mission {
     background: var(--navy);
@@ -355,6 +367,11 @@
     line-height: 1.7;
     font-size: 0.95rem;
     color: #dfe3f0;
+  }
+
+  .mission-text p a {
+    color: var(--yellow);
+    text-decoration: underline;
   }
 
   .stat-bar {
@@ -393,6 +410,18 @@
     font-size: 1.3rem;
     color: var(--navy);
     margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  footer .foot-logo img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--navy);
+    object-fit: cover;
   }
 
   footer a.email {
@@ -514,6 +543,7 @@
   <div class="reselling-card">
     <div class="emoji">📦</div>
     <p>Bring us your used gear or sportswear, and we'll resell it for you on the internet.</p>
+    <span class="ship-tag">🇺🇸 We ship to all US States</span>
   </div>
 </section>
 
@@ -525,7 +555,7 @@
       <p>
         McSweats began as a school project. Now it's a way to connect with other
         students and to give back. Half of everything we make goes to
-        <strong>Dona Gal Escola de Música</strong> in Teresina, Brazil, funding instruments
+        <strong><a href="https://escoladonagal.wixsite.com/escolademusica" target="_blank" rel="noopener">Dona Gal Escola de Música</a></strong> in Teresina, Brazil, funding instruments
         and music classes for kids in an under-resourced community.
       </p>
       <div class="stat-bar"><div class="stat-fill"></div></div>
@@ -535,7 +565,10 @@
 </section>
 
 <footer id="contact">
-  <div class="foot-logo">McSweats 🧦</div>
+  <div class="foot-logo">
+    McSweats.com
+    <img src="https://easy-links.s3.us-west-2.amazonaws.com/avatars/avatar-mcsweats.com-piwknp.jpeg" alt="McSweats logo">
+  </div>
   <p>Questions, feedback, or just want to say hi?</p>
   <a class="email" href="mailto:mateus.carvalho@ljcds.org">mateus.carvalho@ljcds.org</a>
 </footer>
